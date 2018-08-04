@@ -21,16 +21,22 @@ public class BigQuery_CSV_main {
 		BigQuery_CSV_lib blib = new BigQuery_CSV_lib("/Users/mizuno/Downloads/closedqueue-929a267e03b8.json", column, "mznfe");
 		
 		BigQuery_CSV_main bmain = new BigQuery_CSV_main();
-		String tableName = "Fe_OFF_100001";
-		String fileName = "csv/"+tableName+".csv";
-		bmain.getCSV2(fileName, column, column+1, input);
-		//System.out.println("Input Data" +Arrays.deepToString(input));
 		
-		//BigQueryに格納する場合、テーブルを作成する
-		blib.createTable(tableName);
+		for(int i = 2; i <= 5; i++) {
+			String tableName = "Fe_OFF_10000"+i;
+			String fileName = "csv/"+tableName+".csv";
+			bmain.getCSV2(fileName, column, column+1, input);
+			//System.out.println("Input Data" +Arrays.deepToString(input));
+			
+			//BigQueryに格納する場合、テーブルを作成する
+			blib.createTable(tableName);
+			
+			//OK
+			System.out.println("テーブル完了");
 		
-		//データInsert
-		blib.insertCSV(input);
+			//データInsert
+			//blib.insertCSV(input);
+		}
 	}
 	
 	//複数種類のデータを一度に取り込む場合
